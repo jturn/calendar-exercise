@@ -48,9 +48,6 @@ export const getDisplayDate = (timestamp) => {
         day: 'numeric'
     };
 
-
-    // TODO: Format the date like: "Tuesday, April 11, 2017"
-
     return date.toLocaleString('en-US', options);
 };
 
@@ -70,7 +67,6 @@ export const isPastHour = (hour) => {
  * @param {number} hour - The hour
  * @returns {string}
  */
-// TODO: Implement using a more programmatic approach instead of map
 export const getDisplayHour = (hour) => {
     if (hour === 0) {
         return '12 AM';
