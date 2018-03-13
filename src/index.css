@@ -18,6 +18,9 @@ body {
 /*
 /With Sass or LESS, would define global styles in a seperate file and require them in here
 */
+.preventScroll {
+  overflow: hidden;
+}
 .sky {
     background-color: #d1e8f0;
     border-color: #307992;
