@@ -11,9 +11,18 @@ const _HOUR_DISPLAY_MAP = [
  * @returns {array}
  */
 export const filterEventsByDay = (events, timestamp) => {
-    // TODO: Implement day filtering!
+    //Normally would use something like moment.js to handle these calculations.
+    let dateObj = new Date(timestamp);
+    let today = '' + dateObj.getYear() + dateObj.getMonth() + dateObj.getDate();
 
-    return events;
+    let filteredEvents = events.filter((event) => {
+        let eventDateObj = new Date(event.start);
+        let eventDate = '' + eventDateObj.getYear() + eventDateObj.getMonth() + eventDateObj.getDate();
+
+        return eventDate === today;
+    });
+
+    return filteredEvents;
 }
 
 /**
