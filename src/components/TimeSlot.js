@@ -1,6 +1,6 @@
 import React, {PureComponent, PropTypes} from 'react';
 import {EVENTS_PROP_TYPE} from './constants';
-import {getDisplayHour} from '../utils';
+import {getDisplayHour, isPastHour} from '../utils';
 import TimeSlotEvent from './TimeSlotEvent';
 
 import './TimeSlot.css';
@@ -25,13 +25,14 @@ export default class TimeSlot extends PureComponent {
     render() {
         let {hour} = this.props;
         let displayHour = getDisplayHour(hour);
+        let inPast = isPastHour(hour);
 
         return (
             <section className="time-slot">
                 <span className="time-slot__hour-label">
                     {displayHour}
                 </span>
-                <div className="time-slot__events">
+                <div className={"time-slot__events" + (inPast ? " fadeOutEvents" : "")}>
                     {this._renderEvents()}
                 </div>
             </section>

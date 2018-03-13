@@ -44,6 +44,17 @@ export const getDisplayDate = (timestamp) => {
 };
 
 /**
+ * Given an hour number, returns a boolean based on whether that hour is earlier than the current hour
+ * @param {number} hour - The hour
+ * @returns {boolean} 
+ */
+export const isPastHour = (hour) => {
+    let currentHour = new Date().getHours();
+
+    return currentHour > hour;
+};
+
+/**
  * Given an hour number, returns a display string version
  * @param {number} hour - The hour
  * @returns {string}
