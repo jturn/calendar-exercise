@@ -1,8 +1,3 @@
-const _HOUR_DISPLAY_MAP = [
-    '12AM', '1AM', '2AM', '3AM', '4AM', '5AM', '6AM', '7AM', '8AM', '9AM', '10AM', '11AM',
-    '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM', '7PM', '8PM', '9PM', '10PM', '11PM',
-]
-
 /**
  * Given a list of events and a date, filter the events down to those that
  * fall on the same day as the date
@@ -11,9 +6,18 @@ const _HOUR_DISPLAY_MAP = [
  * @returns {array}
  */
 export const filterEventsByDay = (events, timestamp) => {
-    // TODO: Implement day filtering!
+    //Normally would use something like moment.js to handle these calculations.
+    let dateObj = new Date(timestamp);
+    let today = '' + dateObj.getYear() + dateObj.getMonth() + dateObj.getDate();
 
-    return events;
+    let filteredEvents = events.filter((event) => {
+        let eventDateObj = new Date(event.start);
+        let eventDate = '' + eventDateObj.getYear() + eventDateObj.getMonth() + eventDateObj.getDate();
+
+        return eventDate === today;
+    });
+
+    return filteredEvents;
 }
 
 /**
@@ -37,10 +41,25 @@ export const filterEventsByHour = (events, hour) => (
  */
 export const getDisplayDate = (timestamp) => {
     let date = new Date(timestamp);
+    let options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    };
 
-    // TODO: Format the date like: "Tuesday, April 11, 2017"
+    return date.toLocaleString('en-US', options);
+};
 
-    return date.toString();
+/**
+ * Given an hour number, returns a boolean based on whether that hour is earlier than the current hour
+ * @param {number} hour - The hour
+ * @returns {boolean} 
+ */
+export const isPastHour = (hour) => {
+    let currentHour = new Date().getHours();
+
+    return currentHour > hour;
 };
 
 /**
@@ -48,8 +67,18 @@ export const getDisplayDate = (timestamp) => {
  * @param {number} hour - The hour
  * @returns {string}
  */
-// TODO: Implement using a more programmatic approach instead of map
-export const getDisplayHour = (hour) => _HOUR_DISPLAY_MAP[hour]
+export const getDisplayHour = (hour) => {
+    if (hour === 0) {
+        return '12 AM';
+    }
+    if (hour === 12) {
+        return '12 PM';
+    }
+    let formattedHour = hour;
+    formattedHour < 13 ? formattedHour += ' AM' : formattedHour = (formattedHour - 12) + ' PM';
+
+    return formattedHour;
+}
 
 /**
  * Given a list of events, returns the event object whose id matches the specified eventId

@@ -39,18 +39,28 @@ export default class Page extends PureComponent {
 
     _handleSelectEvent(selectedEventId) {
         this.setState({selectedEventId});
+        //Prevent scrolling while the detail overlay is open
+        document.body.classList.add('preventScroll');
     }
 
     _handleEventDetailOverlayClose() {
         this.setState({selectedEventId: undefined});
+        //Re-enable scrolling when overlay is closed
+        document.body.classList.remove('preventScroll');
     }
 
     _handlePrev() {
-        // TODO: Update this.state.day to go back 1 day so previous button works
+        let prevDate = new Date(this.state.day);
+        prevDate.setDate(prevDate.getDate()-1);
+
+        this.setState({day: prevDate});
     }
 
     _handleNext() {
-        // TODO: Update this.state.day to go forward 1 day so next button works
+        let nextDate = new Date(this.state.day);
+        nextDate.setDate(nextDate.getDate()+1);
+
+        this.setState({day: nextDate});
     }
 
     render() {

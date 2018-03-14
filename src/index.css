@@ -15,3 +15,25 @@ body {
     font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif;
     letter-spacing: 0.02em;
 }
+/*
+/With Sass or LESS, would define global styles in a seperate file and require them in here
+*/
+.preventScroll {
+  overflow: hidden;
+}
+.sky {
+    background-color: #d1e8f0;
+    border-color: #307992;
+}
+.canary {
+    background-color: #fcf69a;
+    border-color: #938a04;
+}
+.rose {
+    background-color: #fcbbd2;
+    border-color: #b00843;
+}
+.shamrock {
+    background-color: #009e60;
+    border-color: #003800;
+}
