@@ -71,8 +71,11 @@ export const getDisplayHour = (hour) => {
     if (hour === 0) {
         return '12 AM';
     }
+    if (hour === 12) {
+        return '12 PM';
+    }
     let formattedHour = hour;
-    formattedHour < 12 ? formattedHour += ' AM' : formattedHour = (formattedHour - 12) + ' PM';
+    formattedHour < 13 ? formattedHour += ' AM' : formattedHour = (formattedHour - 12) + ' PM';
 
     return formattedHour;
 }
